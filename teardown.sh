@@ -28,6 +28,9 @@ if [[ -z "$pceFqdn" || -z "$pcePort" || -z "$apiName" || -z "$apiSecret" || -z "
   usage
 fi
 
+#Run in startup/teardown directory
+cd ~/manual-instruqt-startup
+
 echo -e "\n### Starting Deletion Operations ###"
 
 #--- unpair vens-----

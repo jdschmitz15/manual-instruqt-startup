@@ -26,6 +26,8 @@ if [[ -z "$pceFqdn" || -z "$pcePort" || -z "$apiName" || -z "$apiSecret" || -z "
   usage
 fi
 
+# Run in startup/teardown directory
+cd ~/manual-instruqt-startup
 
 # Add PCE Configuration
 echo -e "\n### Adding Workloader PCE Configuration ###"
