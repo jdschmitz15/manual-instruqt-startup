@@ -91,7 +91,7 @@ ENDPOINT_PK=$(cat endpoint_pp)
 
 vensim activate -c ~/vensim-templates/standard-demo/vens.csv -p ~/vensim-templates/standard-demo/processes.csv -m "$pceFqdn:$pcePort" -a "$SERVER_PK" -e "$ENDPOINT_PK"
 
-vensim post-traffic -c I~/vensim-templates/standard-demo/vens.csv -t ~/vensim-templates/standard-demo/traffic.csv -d "today"
+vensim post-traffic -c ~/vensim-templates/standard-demo/vens.csv -t ~/vensim-templates/standard-demo/traffic.csv -d "today"
 
 # Create and Import Resources
 echo -e "\n### Creating and Importing Resources ###"
