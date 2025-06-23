@@ -31,7 +31,7 @@ fi
 
 # Add PCE Configuration
 echo -e "\n### Adding Workloader PCE Configuration ###"
-workloader pce-add -a --name default --fqdn "$pceFqdn:$pcePort" --port 443 --api-user "$apiName" --api-secret "$apiSecret" --org "$orgId" --disable-tls-verification true
+workloader pce-add -a --name default --fqdn "$pceFqdn" --port "$pcePort" --api-user "$apiName" --api-secret "$apiSecret" --org "$orgId" --disable-tls-verification true
 
 
 echo -e "\n### Starting Deletion Operations ###"
