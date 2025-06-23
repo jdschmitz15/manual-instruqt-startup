@@ -46,18 +46,18 @@ fi
 
 #----dd ruleset -------
 workloader ruleset-export --output-file /tmp/delete_ruleset.csv
-if [[ -f /tmp/delete_ruleset.csv]]; then
+if [[ -f /tmp/delete_ruleset.csv ]]; then
   workloader delete /tmp/delete_ruleset.csv --header href --update-pce --no-prompt --provision --continue-on-error
 fi
 
 #--- dd deny rules -----
 workloader deny-rule-export --output-file /tmp/delete_deny.csv 
-if [[ -f /tmp/delete_deny.csv]]; then
+if [[ -f /tmp/delete_deny.csv ]]; then
    workloader delete /tmp/delete_deny.csv --header href --update-pce --no-prompt --provision --continue-on-error
 fi
 #---dd lbg-----
 workloader labelgroup-export --output-file /tmp/delete_lbg.csv
-if [[ -f /tmp/delete_lbg.csv]]; then
+if [[ -f /tmp/delete_lbg.csv ]]; then
    workloader delete /tmp/delete_lbg.csv --header href --update-pce --no-prompt --provision --continue-on-error
 fi
 
