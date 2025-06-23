@@ -10,44 +10,44 @@ echo -e "\n### Starting Deletion Operations ###"
 
 #--- unpair vens-----
 
-workloader ven-export --excl-containerized --headers wkld_href --output-file unpair_vens.csv
+workloader ven-export --excl-containerized --headers wkld_href --output-file /tmp/unpair_vens.csv
 
-sed -i 's/workloads/vens/g' unpair_vens.csv
+sed -i 's/workloads/vens/g' /tmp/unpair_vens.csv
 
 workloader unpair --href-file unpair_vens.csv --include-online --update-pce --no-prompt
 
 #--- dd pairing profile ------
-workloader pairing-profile-export --output-file delete_pp.csv
+workloader pairing-profile-export --output-file /tmp/delete_pp.csv
 workloader delete delete_pp.csv --header href --update-pce --no-prompt --provision
 
 #----dd ruleset -------
-workloader ruleset-export --output-file delete_ruleset.csv
+workloader ruleset-export --output-file /tmp/delete_ruleset.csv
 workloader delete delete_ruleset.csv --header href --update-pce --no-prompt --provision --continue-on-error 
 
 
 #--- dd deny rules -----
-workloader deny-rule-export --output-file delete_deny.csv && workloader delete delete_deny.csv --header href --update-pce --no-prompt --provision --continue-on-error
+workloader deny-rule-export --output-file /tmp/delete_deny.csv && workloader delete /tmp/delete_deny.csv --header href --update-pce --no-prompt --provision --continue-on-error
 
 #---dd lbg-----
-workloader labelgroup-export --output-file delete_lbg.csv && workloader delete delete_lbg.csv --header href --update-pce --no-prompt --provision --continue-on-error
+workloader labelgroup-export --output-file /tmp/delete_lbg.csv && workloader delete /tmp/delete_lbg.csv --header href --update-pce --no-prompt --provision --continue-on-error
 
 #--dd umwl-----
-workloader wkld-export --output-file delete_umwl.csv && workloader delete delete_umwl.csv --header href --update-pce --no-prompt --provision --continue-on-error 
+workloader wkld-export --output-file /tmp/delete_umwl.csv && workloader delete /tmp/delete_umwl.csv --header href --update-pce --no-prompt --provision --continue-on-error 
 
 #--dd svc-----
-workloader svc-export --compressed --output-file delete_svc.csv && workloader delete delete_svc.csv --header href --update-pce --no-prompt --provision --continue-on-error
+workloader svc-export --compressed --output-file /tmp/delete_svc.csv && workloader delete /tmp/delete_svc.csv --header href --update-pce --no-prompt --provision --continue-on-error
 
 #--dd ipl-----
-workloader ipl-export --output-file delete_ipl.csv && workloader delete delete_ipl.csv --header href --update-pce --no-prompt --provision --continue-on-error 
+workloader ipl-export --output-file /tmp/delete_ipl.csv && workloader delete /tmp/delete_ipl.csv --header href --update-pce --no-prompt --provision --continue-on-error 
 
 #---dd label---
-workloader label-export --output-file delete_labels.csv && workloader delete delete_labels.csv --header href --update-pce --no-prompt --provision
+workloader label-export --output-file /tmp/delete_labels.csv && workloader delete /tmp/delete_labels.csv --header href --update-pce --no-prompt --provision
 
 #--dd label dimension----
-workloader label-dimension-export --output-file delete_label_dimension.csv && workloader delete delete_label_dimension.csv --header href --update-pce --no-prompt --provision
+workloader label-dimension-export --output-file /tmp/delete_label_dimension.csv && workloader /tmp/delete delete_label_dimension.csv --header href --update-pce --no-prompt --provision
 
 #--dd ad-----
-workloader adgroup-export --output-file delete_ad.csv && workloader delete delete_ad.csv --header href --update-pce --no-prompt --provision --continue-on-error
+workloader adgroup-export --output-file d/tmp/elete_ad.csv && workloader delete /tmp/delete_ad.csv --header href --update-pce --no-prompt --provision --continue-on-error
 
 echo -e "\n### Deletion Operations Completed ###"
 
@@ -69,7 +69,7 @@ vensim post-traffic -c I~/vensim-templates/standard-demo/vens.csv -t ~/vensim-te
 echo -e "\n### Creating and Importing Resources ###"
 workloader label-dimension-import ~/vensim-templates/standard-demo/labeldimensions.csv --update-pce --no-prompt
 workloader wkld-import ~/vensim-templates/standard-demo/wklds.csv --umwl --allow-enforcement-changes --update-pce --no-prompt
-workloader svc-import ~/vensim-templates/standard-demo/svcs.csv --update-pce --provision --no-prompt && workloader svc-import Instruqt-Vensim-Lab/svcs_meta.csv --meta --update-pce --no-prompt --provision
+workloader svc-import ~/vensim-templates/standard-demo/svcs.csv --update-pce --provision --no-prompt && workloader svc-import ~/vensim-templates/svcs_meta.csv --meta --update-pce --no-prompt --provision
 workloader ipl-import ~/vensim-templates/standard-demo/iplists.csv --update-pce --no-prompt --provision
 
 echo -e "\n### Script Execution Completed Successfully ###"
