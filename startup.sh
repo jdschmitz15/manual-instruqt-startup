@@ -5,7 +5,7 @@
 usage() {
   echo "Usage: $0 -f <pceFqdn> -P <pcePort> -u <apiName> -s <apiSecret> -o <orgId>"
   echo "  -f  PCE FQDN"
-  echo "  -p  PCE Port"
+  echo "  -P  PCE Port"
   echo "  -u  API Username"
   echo "  -s  API Secret"
   echo "  -o  Org ID"
@@ -15,7 +15,7 @@ usage() {
 while getopts "f:P:u:s:o:" opt; do
   case $opt in
     f) pceFqdn="$OPTARG" ;;
-    p) pcePort="$OPTARG" ;;
+    P) pcePort="$OPTARG" ;;
     u) apiName="$OPTARG" ;;
     s) apiSecret="$OPTARG" ;;
     o) orgId="$OPTARG" ;;
