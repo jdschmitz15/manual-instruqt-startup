@@ -128,7 +128,6 @@ workloader svc-import ~/vensim-templates/svcs_meta.csv --meta --update-pce --no-
 workloader ipl-import ~/vensim-templates/standard-demo/iplists.csv --update-pce --no-prompt --provision
 workloader ruleset-import ~/vensim-templates/standard-demo/rulesets.csv --update-pce --no-prompt --provision
 workloader adgroup-import ~/vensim-templates/standard-demo/adgroups.csv --update-pce --no-prompt
-workloader label-import ~/vensim-templates/standard-demo/labels.csv --update-pce --no-prompt
 workloader rule-import ~/vensim-templates/standard-demo/rules.csv --update-pce --no-prompt --provision
 
 
