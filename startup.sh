@@ -40,9 +40,9 @@ echo -e "\n### Activating VENSim ###"
 SERVER_PK=$(cat server_pp)
 ENDPOINT_PK=$(cat endpoint_pp)
 
-vensim activate -c ~/vensim-templates/standard-demo/vens.csv -p ~/vensim-templates/standard-demo/processes.csv -m "$pceFqdn:$pcePort" -a "$SERVER_PK" -e "$ENDPOINT_PK"
+./vensim activate -c ~/vensim-templates/standard-demo/vens.csv -p ~/vensim-templates/standard-demo/processes.csv -m "$pceFqdn:$pcePort" -a "$SERVER_PK" -e "$ENDPOINT_PK"
 
-vensim post-traffic -c ~/vensim-templates/standard-demo/vens.csv -t ~/vensim-templates/standard-demo/traffic.csv -d "today"
+./vensim post-traffic -c ~/vensim-templates/standard-demo/vens.csv -t ~/vensim-templates/standard-demo/traffic.csv -d "today"
 
 # Create and Import Resources
 echo -e "\n### Creating and Importing Resources ###"
@@ -81,19 +81,19 @@ TRAFFIC_FILE=~/vensim-templates/standard-demo/traffic.csv
 PROCESS_FILE=~/vensim-templates/standard-demo/processes.csv
 
 # Update workload running processes once a day at 6 AM
-0 6 * * * cd $TARGET_DIR && vensim update-processes -c $WORKLOAD_FILE -p $PROCESS_FILE >/dev/null 2>&1
+0 6 * * * cd $TARGET_DIR && ./vensim update-processes -c $WORKLOAD_FILE -p $PROCESS_FILE >/dev/null 2>&1
 
 # Post traffic every 10 minutes
-*/10 * * * * cd $TARGET_DIR && vensim post-traffic -c $WORKLOAD_FILE -t $TRAFFIC_FILE -d today >/dev/null 2>&1
+*/10 * * * * cd $TARGET_DIR && ./vensim post-traffic -c $WORKLOAD_FILE -t $TRAFFIC_FILE -d today >/dev/null 2>&1
 
 # Heartbeat every 5 minutes
-*/5 * * * * cd $TARGET_DIR && vensim heartbeat -c $WORKLOAD_FILE >/dev/null 2>&1
+*/5 * * * * cd $TARGET_DIR && ./vensim heartbeat -c $WORKLOAD_FILE >/dev/null 2>&1
 
 # Mimic event service by getting policy every 15 seconds.
-* * * * * cd $TARGET_DIR && vensim get-policy -c $WORKLOAD_FILE >/dev/null 2>&1
-* * * * * sleep 15 && cd $TARGET_DIR && vensim get-policy -c $WORKLOAD_FILE >/dev/null 2>&1
-* * * * * sleep 30 && cd $TARGET_DIR && vensim get-policy -c $WORKLOAD_FILE >/dev/null 2>&1
-* * * * * sleep 45 && cd $TARGET_DIR && vensim get-policy -c $WORKLOAD_FILE >/dev/null 2>&1
+* * * * * cd $TARGET_DIR && ./vensim get-policy -c $WORKLOAD_FILE >/dev/null 2>&1
+* * * * * sleep 15 && cd $TARGET_DIR && ./vensim get-policy -c $WORKLOAD_FILE >/dev/null 2>&1
+* * * * * sleep 30 && cd $TARGET_DIR && ./vensim get-policy -c $WORKLOAD_FILE >/dev/null 2>&1
+* * * * * sleep 45 && cd $TARGET_DIR && ./vensim get-policy -c $WORKLOAD_FILE >/dev/null 2>&1
 
 # Remove the vensim log every hour
 0 * * * * cd $TARGET_DIR && rm -f vensim.log
