@@ -33,76 +33,76 @@ cd ~/manual-instruqt-startup
 
 # Add PCE Configuration
 echo -e "\n### Adding Workloader PCE Configuration ###"
-workloader pce-add -a --name default --fqdn "$pceFqdn" --port "$pcePort" --api-user "$apiName" --api-secret "$apiSecret" --org "$orgId" --disable-tls-verification true
+./workloader pce-add -a --name default --fqdn "$pceFqdn" --port "$pcePort" --api-user "$apiName" --api-secret "$apiSecret" --org "$orgId" --disable-tls-verification true
 
 
 echo -e "\n### Starting Deletion Operations ###"
 
 #--- unpair vens-----
 
-workloader ven-export --excl-containerized --headers wkld_href --output-file /tmp/unpair_vens.csv
+./workloader ven-export --excl-containerized --headers wkld_href --output-file /tmp/unpair_vens.csv
 if [[ -f /tmp/unpair_vens.csv ]]; then
   sed -i 's/workloads/vens/g' /tmp/unpair_vens.csv
-  workloader unpair --href-file /tmp/unpair_vens.csv --include-online --update-pce --no-prompt
+  ./workloader unpair --href-file /tmp/unpair_vens.csv --include-online --update-pce --no-prompt
 fi
 
 #--- dd pairing profile ------
-workloader pairing-profile-export --output-file /tmp/delete_pp.csv
+./workloader pairing-profile-export --output-file /tmp/delete_pp.csv
 if [[ -f /tmp/delete_pp.csv ]]; then
-  workloader delete /tmp/delete_pp.csv --header href --update-pce --no-prompt --provision
+  ./workloader delete /tmp/delete_pp.csv --header href --update-pce --no-prompt --provision
 fi
 
 #----dd ruleset -------
-workloader ruleset-export --output-file /tmp/delete_ruleset.csv
+./workloader ruleset-export --output-file /tmp/delete_ruleset.csv
 if [[ -f /tmp/delete_ruleset.csv ]]; then
-  workloader delete /tmp/delete_ruleset.csv --header href --update-pce --no-prompt --provision --continue-on-error
+  ./workloader delete /tmp/delete_ruleset.csv --header href --update-pce --no-prompt --provision --continue-on-error
 fi
 
 #--- dd deny rules -----
-workloader deny-rule-export --output-file /tmp/delete_deny.csv 
+./workloader deny-rule-export --output-file /tmp/delete_deny.csv 
 if [[ -f /tmp/delete_deny.csv ]]; then
-   workloader delete /tmp/delete_deny.csv --header href --update-pce --no-prompt --provision --continue-on-error
+   ./workloader delete /tmp/delete_deny.csv --header href --update-pce --no-prompt --provision --continue-on-error
 fi
 #---dd lbg-----
-workloader labelgroup-export --output-file /tmp/delete_lbg.csv
+./workloader labelgroup-export --output-file /tmp/delete_lbg.csv
 if [[ -f /tmp/delete_lbg.csv ]]; then
-   workloader delete /tmp/delete_lbg.csv --header href --update-pce --no-prompt --provision --continue-on-error
+   ./workloader delete /tmp/delete_lbg.csv --header href --update-pce --no-prompt --provision --continue-on-error
 fi
 
 #--dd umwl-----
-workloader wkld-export --output-file /tmp/delete_umwl.csv 
+./workloader wkld-export --output-file /tmp/delete_umwl.csv 
 if [[ -f /tmp/delete_umwl.csv ]]; then
-   workloader delete /tmp/delete_umwl.csv --header href --update-pce --no-prompt --provision --continue-on-error
+   ./workloader delete /tmp/delete_umwl.csv --header href --update-pce --no-prompt --provision --continue-on-error
 fi
 
 #--dd svc-----
-workloader svc-export --compressed --output-file /tmp/delete_svc.csv 
+./workloader svc-export --compressed --output-file /tmp/delete_svc.csv 
 if [[ -f /tmp/delete_svc.csv ]]; then
-   workloader delete /tmp/delete_svc.csv --header href --update-pce --no-prompt --provision --continue-on-error
+   ./workloader delete /tmp/delete_svc.csv --header href --update-pce --no-prompt --provision --continue-on-error
 fi
 
 #--dd ipl-----
-workloader ipl-export --output-file /tmp/delete_ipl.csv 
+./workloader ipl-export --output-file /tmp/delete_ipl.csv 
 if [[ -f /tmp/delete_ipl.csv ]]; then
-   workloader delete /tmp/delete_ipl.csv --header href --update-pce --no-prompt --provision --continue-on-error
+   ./workloader delete /tmp/delete_ipl.csv --header href --update-pce --no-prompt --provision --continue-on-error
 fi
 
 #---dd label---
-workloader label-export --output-file /tmp/delete_labels.csv 
+./workloader label-export --output-file /tmp/delete_labels.csv 
 if [[ -f /tmp/delete_labels.csv ]]; then
-   workloader delete /tmp/delete_labels.csv --header href --update-pce --no-prompt --provision
+   ./workloader delete /tmp/delete_labels.csv --header href --update-pce --no-prompt --provision
 fi
 
 #--dd label dimension----
-workloader label-dimension-export --output-file /tmp/delete_label_dimension.csv 
+./workloader label-dimension-export --output-file /tmp/delete_label_dimension.csv 
 if [[ -f /tmp/delete_label_dimension.csv ]]; then
-   workloader delete /tmp/delete_label_dimension.csv --header href --update-pce --no-prompt --provision
+   ./workloader delete /tmp/delete_label_dimension.csv --header href --update-pce --no-prompt --provision
 fi
 
 #--dd ad-----
-workloader adgroup-export --output-file /tmp/delete_ad.csv 
+./workloader adgroup-export --output-file /tmp/delete_ad.csv 
 if [[ -f /tmp/delete_ad.csv ]]; then
-   workloader delete /tmp/delete_ad.csv --header href --update-pce --no-prompt --provision --continue-on-error
+   ./workloader delete /tmp/delete_ad.csv --header href --update-pce --no-prompt --provision --continue-on-error
 fi
 
 echo -e "\n### Deletion Operations Completed ###"
